@@ -1,0 +1,66 @@
+# Key_Measures:
+Average Order Size = 
+AVERAGEX( Sales,
+	Sales[Line Total] )
+  
+Avg Order Size = DIVIDE([Total Sales],[Total Transactions],0)
+
+Customer Value = DIVIDE([Average Order Size],[Purchase Frequency],0)
+
+First Month = //in page context
+VAR MinDate = MIN( Dates[Date] )
+
+RETURN
+CALCULATE( SELECTEDVALUE( Dates[Month & Year] ),
+    FILTER( ALL( Dates[Date] ), Dates[Date] = MinDate ) )
+    
+Last Month = //in page context
+VAR MaxDate = MAX( Dates[Date] )
+
+RETURN
+CALCULATE( SELECTEDVALUE( Dates[Month & Year] ),
+    FILTER( ALL( Dates[Date] ), Dates[Date] = MaxDate ))
+    
+Last Sale Amount = 
+CALCULATE( [Total Sales] , LASTNONBLANK( Dates[Date] , [Total Sales] ) )
+
+Last Sales Date = LASTNONBLANK( Dates[Date] , [Total Sales] )
+
+Profit Margin = 
+DIVIDE( [Total Profits] , [Total Sales] , 0 )
+
+Purchase Frequency = DIVIDE([Total Transactions],[Total Customers])
+
+Total Costs = 
+SUMX ( Sales , 
+	Sales[Order Quantity] * Sales[Total Unit Cost] )
+  
+Total Customers = 
+DISTINCTCOUNT( Sales[Customer Name Index] )
+
+Total Customers with Regions = 
+CALCULATE( 
+	[Total Customers],
+		Sales)
+//Used to work out how many customers sold to within each regions
+
+Total Items = SUM ( Sales[Order Quantity] )
+
+Total Products = DISTINCTCOUNT( Products[Product Name] )
+
+Total Products with Regions = 
+CALCULATE( 
+	[Total Products],
+		Sales)
+//Used to work out how many customers sold to within each regions
+
+Total Profits = [Total Sales] - [Total Costs]
+
+Total Sales = 
+SUMX( Sales, Sales[Unit Price] * Sales[Order Quantity] )
+
+Total Transactions = 
+COUNTROWS ( Sales )
+
+
+
