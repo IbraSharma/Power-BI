@@ -1,0 +1,41 @@
+Avg. Order Size 1M MA = 
+AVERAGEX(
+	DATESINPERIOD( Dates[Date],
+		LASTDATE( Dates[Date] ),
+		-1, MONTH ),
+		[Average Order Size] )
+    
+    Costs 1M MA = 
+AVERAGEX(
+	DATESINPERIOD( Dates[Date],
+		LASTDATE( Dates[Date] ),
+		-1, MONTH ),
+		[Total Costs] )
+    
+    Margins 1M MA = 
+AVERAGEX(
+	DATESINPERIOD( Dates[Date],
+		LASTDATE( Dates[Date] ),
+		-1, MONTH ),
+		[Profit Margin] )
+    
+    Profits 1M MA = 
+AVERAGEX(
+	DATESINPERIOD( Dates[Date],
+		LASTDATE( Dates[Date] ),
+		-1, MONTH ),
+		[Total Profits] )
+    
+    Sales 1M MA = 
+AVERAGEX(
+	DATESINPERIOD( Dates[Date],
+		LASTDATE( Dates[Date] ),
+		-1, MONTH ),
+		[Total Sales] )
+    
+    Sales LY 1M MA = 
+AVERAGEX(
+	DATESINPERIOD( Dates[Date],
+		LASTDATE( Dates[Date] ),
+		-1, MONTH ),
+		[Sales LY] )
