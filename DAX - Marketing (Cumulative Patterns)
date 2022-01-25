@@ -1,0 +1,40 @@
+% Change YoY = DIVIDE( [Cumulative Sales] - [Cumulative Sales LY], [Cumulative Sales LY], 0 )
+Cumulative Diff. vs LY = [Cumulative Sales] - [Cumulative Sales LY]
+Cumulative Profit Diff. vs LY = [Cumulative Profits] - [Cumulative Profits LY]
+
+Cumulative Profits = 
+VAR LastSalesDate = CALCULATE( MAX( Sales[OrderDate] ), ALL( Sales ) )
+
+RETURN
+IF( SELECTEDVALUE( Dates[Date] ) > LastSalesDate, BLANK(),
+	CALCULATE( [Total Profits] , 
+		FILTER( ALLSELECTED( Dates),
+			Dates[Date] <= MAX( Dates[Date] ) )))
+      
+ Cumulative Profits LY = 
+VAR LastSalesDate = CALCULATE( LASTDATE( Sales[OrderDate] ), ALL( Sales ) )
+
+RETURN
+IF( SELECTEDVALUE( Dates[Date] ) > LastSalesDate, BLANK(),
+CALCULATE( [Profits LY] , 
+	FILTER( ALLSELECTED( Dates ),
+		Dates[Date] <= MAX( Dates[Date] ) ) ))
+    
+Cumulative Sales = 
+VAR LastSalesDate = CALCULATE( MAX( Sales[OrderDate] ), ALL( Sales ) )
+
+RETURN
+IF( SELECTEDVALUE( Dates[Date] ) > LastSalesDate, BLANK(),
+	CALCULATE( [Total Sales] , 
+		FILTER( ALLSELECTED( Dates ),
+			Dates[Date] <= MAX( Dates[Date] ) )))
+      
+Cumulative Sales LY = 
+VAR LastSalesDate = CALCULATE( LASTDATE( Sales[OrderDate] ), ALL( Sales ) )
+
+RETURN
+IF( SELECTEDVALUE( Dates[Date] ) > LastSalesDate, BLANK(),
+CALCULATE( [Sales LY] , 
+	FILTER( ALLSELECTED( Dates ),
+		Dates[Date] <= MAX( Dates[Date] ) ) ))
+    
